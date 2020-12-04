@@ -28,7 +28,7 @@ namespace AdventOfCode2020_1._1
         }
         static void task2()
         {
-            string[] numbers = System.IO.File.ReadAllLines("..\\..\\..\\input.txt");
+            string[] numbers = System.IO.File.ReadAllLines("input.txt");
             int arrl = numbers.Length;
 
             for(int fi = 0; fi<arrl; fi++)

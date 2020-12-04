@@ -17,7 +17,7 @@ namespace AdventOfCode2020_2._1
     {
         public static int task1()
         {
-            string[] passwords = System.IO.File.ReadAllLines("..\\..\\..\\passwords.txt");
+            string[] passwords = System.IO.File.ReadAllLines("passwords.txt");
 
             char[] spearator = { ' ' };
             int counter = 0;
