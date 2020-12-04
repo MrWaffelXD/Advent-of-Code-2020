@@ -4,28 +4,32 @@ namespace AdventOfCode2020_3._1
 {
     class Program
     {
-        static void Main(string[] args)
+        static int task1()
         {
-            //193
             string[] map = System.IO.File.ReadAllLines("input.txt");//last char 30 (-31)
 
-            int x = 0, trees = 0;
+            int x = 0, y = 0, trees = 0;
 
-            for(int y = 0; y < map.Length; y++)
+            while (y < map.Length)
             {
                 if (map[y][x] == '#')
                 {
                     trees++;
-                    Console.Write("Tree at: ");
                 }
-                Console.WriteLine(y + " / " + x);
+
                 x = x + 3;
+
+                y++;
                 if (x > 30)
                 {
                     x = x - 31;
                 }
             }
-            Console.WriteLine("Total Trees: " + trees);
+            return trees;
+        }
+        static void Main(string[] args)
+        {
+            Console.WriteLine("You hit {0} trees.", task1());
         }
     }
 }
