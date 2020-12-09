@@ -5,14 +5,17 @@ namespace AdventOfCode2020_8._1
 {
     class Program
     {
-        public static void performJump(int v, int old)
+        public static int performJump(int v, int old)
         {
-
+            int value = old + v;
+            Console.WriteLine("Jump to {0}", value);
+            return value -1;
         }
-        public static int changeAcc(int v)
+        public static int changeAcc(int v, int accu)
         {
-            Console.WriteLine("v: {0}", v);
-            int value = v;
+            
+            int value = accu + v;
+            Console.WriteLine("New Accu: {0}", value);
             return value;
         }
         static void Main(string[] args)
@@ -21,7 +24,9 @@ namespace AdventOfCode2020_8._1
             string[] stepsArr = instructions.Split("\n");
 
             List<string[]> steps = new List<string[]>();
+            List<int> doneSteps = new List<int>();
 
+            Console.WriteLine("Instruction set:");
             foreach (var s in stepsArr)
             {
                 var temp = s;
@@ -30,21 +35,34 @@ namespace AdventOfCode2020_8._1
                 Console.WriteLine(s);
             }
             int i = 0, accu = 0;
-            foreach (var s in steps)
+            for (int s = 0; s < steps.Count;)
             {
-                switch (s[0])
+                if (!doneSteps.Contains(s))
                 {
-                    case "acc": //change value
-                        accu = changeAcc(Convert.ToInt32(s[1]));
-                        break;
-                    case "jmp":
-                        performJump(Convert.ToInt32(s[1]), i);
-                        break;
-                    case "nop":
-                        break;
+                    doneSteps.Add(s);
+                    switch (steps[s][0])
+                    {
+                        case "acc": //change value
+                            accu = changeAcc(Convert.ToInt32(steps[s][1]), accu);
+                            s++;
+                            break;
+                        case "jmp":
+                            s = performJump(Convert.ToInt32(steps[s][1]), s);
+                            s++;
+                            break;
+                        case "nop":
+                            s++;
+                            break;
+                    }
                 }
-                i++;
+                else
+                {
+                    break;
+                }
+
             }
+            Console.WriteLine("Done");
+            Console.WriteLine("Accumulator: {0}" + accu);
         }
     }
 }
